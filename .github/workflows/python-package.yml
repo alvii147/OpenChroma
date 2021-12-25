@@ -28,7 +28,9 @@ jobs:
         python3 -m pip install -r tests/requirements.test.txt
     - name: Run flake8 & black
       run: |
+        chmod +x format.sh
         ./format.sh
     - name: Run pytest with coverage
       run: |
+        chmod +x cov.sh
         ./cov.sh
