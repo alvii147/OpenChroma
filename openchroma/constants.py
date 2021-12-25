@@ -1,0 +1,4 @@
+RGB_SHAPE = (3,)
+RGB_RANGE = (0, 255)
+CMYK_SHAPE = (4,)
+CMYK_RANGE = (0, 100)

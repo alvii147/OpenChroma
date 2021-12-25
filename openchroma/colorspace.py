@@ -1,11 +1,7 @@
 import numpy as np
 
-from .utils import requireArrayLike, requireAxisDim
-
-RGB_SHAPE = (3,)
-RGB_RANGE = (0, 255)
-CMYK_SHAPE = (4,)
-CMYK_RANGE = (0, 100)
+from .utils import requireArrayLike, requireAxisSize
+from .constants import RGB_SHAPE, RGB_RANGE, CMYK_SHAPE, CMYK_RANGE
 
 def _RGB_to_CMYK(rgb, precision=2):
     '''
@@ -63,7 +59,7 @@ def RGB_to_CMYK(rgb, precision=2):
     # check if input is array-like
     requireArrayLike(rgb, var_name='rgb')
     # check if last axis is 3-dimensional
-    requireAxisDim(rgb, RGB_SHAPE[-1], -1, var_name='rgb')
+    requireAxisSize(rgb, RGB_SHAPE[-1], -1, var_name='rgb')
 
     # convert to CMYK along last axis
     return np.apply_along_axis(_RGB_to_CMYK, -1, rgb, precision=precision)
@@ -120,7 +116,7 @@ def CMYK_to_RGB(cmyk, precision=2):
     # check if input is array-like
     requireArrayLike(cmyk, var_name='cmyk')
     # check if last axis is 3-dimensional
-    requireAxisDim(cmyk, CMYK_SHAPE[-1], -1, var_name='cmyk')
+    requireAxisSize(cmyk, CMYK_SHAPE[-1], -1, var_name='cmyk')
 
     # convert to RGB along last axis
     return np.apply_along_axis(_CMYK_to_RGB, -1, cmyk, precision=precision)

@@ -6,8 +6,10 @@ from openchroma.utils import (
     requireArrayLike,
     isShape,
     requireShape,
-    isAxisDim,
-    requireAxisDim,
+    isDim,
+    requireDim,
+    isAxisSize,
+    requireAxisSize,
 )
 
 isArrayLike_parameters = [
@@ -44,19 +46,36 @@ def test_isShape(arr, shape, result):
         with pytest.raises(ValueError):
             requireShape(arr, shape)
 
-isAxisDim_parameters = [
+isDim_parameters = [
+    [np.zeros(3), 1, True],
+    [np.zeros((2, 3, 8)), 3, True],
+    [np.zeros(9), 4, False],
+    [np.zeros((7, 8)), 1, False],
+]
+
+@pytest.mark.parametrize('arr, dim, result', isDim_parameters)
+def test_isDim(arr, dim, result):
+    assert isDim(arr, dim) == result
+
+    if result == True:
+        requireDim(arr, dim)
+    else:
+        with pytest.raises(ValueError):
+            requireDim(arr, dim)
+
+isAxisSize_parameters = [
     [np.zeros(3), 3, -1, True],
     [np.zeros((6, 2, 3)), 2, 1, True],
     [np.zeros(9), 4, -1, False],
     [np.zeros((7, 8)), 3, 1, False],
 ]
 
-@pytest.mark.parametrize('arr, dim, axis, result', isAxisDim_parameters)
-def test_isAxisDim(arr, dim, axis, result):
-    assert isAxisDim(arr, dim, axis=axis) == result
+@pytest.mark.parametrize('arr, size, axis, result', isAxisSize_parameters)
+def test_isAxisDim(arr, size, axis, result):
+    assert isAxisSize(arr, size, axis=axis) == result
 
     if result == True:
-        requireAxisDim(arr, dim, axis=axis)
+        requireAxisSize(arr, size, axis=axis)
     else:
         with pytest.raises(ValueError):
-            requireAxisDim(arr, dim, axis=axis)
+            requireAxisSize(arr, size, axis=axis)
