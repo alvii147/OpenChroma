@@ -4,6 +4,7 @@ from PIL import Image
 from .utils import requireArrayLike, requireDim, requireAxisSize
 from .constants import RGB_SHAPE
 
+
 def openImage(path):
     '''
     Open image from given path.
@@ -26,6 +27,7 @@ def openImage(path):
 
     return img
 
+
 def saveImage(img, path):
     '''
     Save image at given path.
@@ -47,6 +49,7 @@ def saveImage(img, path):
     im = Image.fromarray(np.array(img, dtype=np.uint8), 'RGB')
     # save image
     im.save(path)
+
 
 def splitChannels(img):
     '''
@@ -81,6 +84,7 @@ def splitChannels(img):
     )
 
     return r, g, b
+
 
 def combineChannels(r, g, b):
     '''

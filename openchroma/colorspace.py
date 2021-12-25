@@ -3,6 +3,7 @@ import numpy as np
 from .utils import requireArrayLike, requireAxisSize
 from .constants import RGB_SHAPE, RGB_RANGE, CMYK_SHAPE, CMYK_RANGE
 
+
 def _RGB_to_CMYK(rgb, precision=2):
     '''
     Convert array from RGB space to CMYK space values.
@@ -39,6 +40,7 @@ def _RGB_to_CMYK(rgb, precision=2):
 
     return cmyk
 
+
 def RGB_to_CMYK(rgb, precision=2):
     '''
     Convert array from RGB space to CMYK space values on the last axis.
@@ -63,6 +65,7 @@ def RGB_to_CMYK(rgb, precision=2):
 
     # convert to CMYK along last axis
     return np.apply_along_axis(_RGB_to_CMYK, -1, rgb, precision=precision)
+
 
 def _CMYK_to_RGB(cmyk, precision=2):
     '''
@@ -95,6 +98,7 @@ def _CMYK_to_RGB(cmyk, precision=2):
         rgb[i] = max(round(val, precision), 0)
 
     return rgb
+
 
 def CMYK_to_RGB(cmyk, precision=2):
     '''

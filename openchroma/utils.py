@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def isArrayLike(arr):
     '''
     Check if object is array-like.
@@ -19,6 +20,7 @@ def isArrayLike(arr):
 
     return is_array_like
 
+
 def requireArrayLike(arr, var_name='Array', exception=TypeError):
     '''
     Raise exception if object is array-like.
@@ -36,6 +38,7 @@ def requireArrayLike(arr, var_name='Array', exception=TypeError):
     if not isArrayLike(arr):
         message = f'`{var_name}` must be an array-like object'
         raise exception(message)
+
 
 def isShape(arr, shape):
     '''
@@ -62,6 +65,7 @@ def isShape(arr, shape):
 
     return is_shape
 
+
 def requireShape(arr, shape, var_name='Array', exception=ValueError):
     '''
     Raise exception if array is not of desired shape.
@@ -81,6 +85,7 @@ def requireShape(arr, shape, var_name='Array', exception=ValueError):
     if not isShape(arr, shape):
         message = f'`{var_name}` must be of shape {shape}'
         raise exception(message)
+
 
 def isDim(arr, dim):
     '''
@@ -104,6 +109,7 @@ def isDim(arr, dim):
 
     return is_dim
 
+
 def requireDim(arr, dim, var_name='Array', exception=ValueError):
     '''
     Raise exception if array is not of desired dimension.
@@ -123,6 +129,7 @@ def requireDim(arr, dim, var_name='Array', exception=ValueError):
     if not isDim(arr, dim):
         message = f'`{var_name}` must be {dim}-dimensional'
         raise exception(message)
+
 
 def isAxisSize(arr, size, axis=0):
     '''
@@ -147,6 +154,7 @@ def isAxisSize(arr, size, axis=0):
     is_axis_size = arr_shape[axis] == size
 
     return is_axis_size
+
 
 def requireAxisSize(arr, size, axis=0, var_name='Array', exception=ValueError):
     '''
