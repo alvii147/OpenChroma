@@ -7,10 +7,10 @@ cd "$(dirname "$0")"
 export PYTHONPATH=${PWD}
 
 # run all tests
-coverage run --source openchroma -m pytest -v -s tests/
+coverage run -m pytest -v -s tests/
 
 # get coverage report
-coverage report -m
+coverage report
 
 # erase coverage
 coverage erase

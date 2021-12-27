@@ -1,0 +1,5 @@
+[run]
+source = openchroma/
+
+[report]
+fail_under = 100
