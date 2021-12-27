@@ -178,23 +178,23 @@ def slidingWindowOperation(img, window, op=np.mean, dtype=object, edges=False):
     output = np.zeros(output_shape, dtype=dtype)
 
     # perform operation on image and store in output array
-    oi = 0
+    p = 0
     for i in range(*top_left_range[0]):
-        oj = 0
+        k = 0
         for j in range(*top_left_range[1]):
             window_range = (
                 (max(i, 0), min(i + n, h)),
                 (max(j, 0), min(j + m, w)),
             )
 
-            output[oi][oj] = op(
+            output[p][k] = op(
                 img[
                     window_range[0][0] : window_range[0][1],
                     window_range[1][0] : window_range[1][1],
                 ]
             )
-            oj += 1
+            k += 1
 
-        oi += 1
+        p += 1
 
     return output
