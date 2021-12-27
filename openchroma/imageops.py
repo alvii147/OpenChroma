@@ -180,20 +180,20 @@ def slidingWindowOperation(img, window, op=np.mean, dtype=object, edges=False):
     # perform operation on image and store in output array
     p = 0
     for i in range(*top_left_range[0]):
-        k = 0
+        q = 0
         for j in range(*top_left_range[1]):
             window_range = (
                 (max(i, 0), min(i + n, h)),
                 (max(j, 0), min(j + m, w)),
             )
 
-            output[p][k] = op(
+            output[p][q] = op(
                 img[
                     window_range[0][0] : window_range[0][1],
                     window_range[1][0] : window_range[1][1],
                 ]
             )
-            k += 1
+            q += 1
 
         p += 1
 
