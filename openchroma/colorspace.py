@@ -12,6 +12,7 @@ def _RGB_to_CMYK(rgb, precision=2):
     ----------
     rgb : array-like
         1D input array in RGB space.
+
     precision : int, optional
         Number of decimal places to round values to.
 
@@ -49,6 +50,7 @@ def RGB_to_CMYK(rgb, precision=2):
     ----------
     rgb : array-like
         Input array in RGB space.
+
     precision : int, optional
         Number of decimal places to round values to.
 
@@ -75,6 +77,7 @@ def _CMYK_to_RGB(cmyk, precision=2):
     ----------
     cmyk : array-like
         1D input array in CMYK space.
+
     precision : int, optional
         Number of decimal places to round values to.
 
@@ -108,6 +111,7 @@ def CMYK_to_RGB(cmyk, precision=2):
     ----------
     cmyk : array-like
         Input array in RGB space.
+
     precision : int, optional
         Number of decimal places to round values to.
 
