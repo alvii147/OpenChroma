@@ -1,7 +1,7 @@
 import numpy as np
 from PIL import Image
 
-from .utils import requireArrayLike, requireDim, requireAxisSize
+from .utils import requireArrayLike, requireDim, requireAxisSize, requireShape
 from .constants import RGB_SHAPE
 
 
@@ -125,6 +125,72 @@ def combineChannels(r, g, b):
     return img
 
 
+def cropImage(img, top_left, bottom_right=None, height_width=None):
+    '''
+    Crop image by given coordinates and lengths.
+
+    Parameters
+    ----------
+    img : array-like
+        2D (or higher) image array.
+
+    top_left : array-like
+        Coordinates of top left point where the image should be cropped.
+
+    bottom_right : array-like, optional
+        Coordinates of the bottom right point where the image should be
+        cropped. If this is not provided, ``height_width`` must be given.
+
+    height_width : array-like, optional
+        Height & width of the cropped image, packed in a 2-element array. If
+        this is not provided, ``bottom_right`` must be given.
+
+    Returns
+    -------
+    cropped_img : numpy.ndarray
+        2D (or higher) cropped image array.
+    '''
+
+    # check if inputs are array-like
+    requireArrayLike(img, var_name='img')
+    # check if top left coordinates are array-like and of shape (2,)
+    requireArrayLike(top_left, var_name='top_left')
+    requireShape(top_left, (2,))
+
+    top = top_left[0]
+    left = top_left[1]
+
+    if bottom_right is None:
+        if height_width is None:
+            message = 'At least one of '
+            message += '`bottom_right` and `height_width` '
+            message += 'must be specified'
+            raise ValueError(message)
+
+        # check if height & width are array-like
+        requireArrayLike(height_width, var_name='height_width')
+        # check if height & width are of shape (2,)
+        requireShape(height_width, (2,))
+
+        height = height_width[0]
+        width = height_width[1]
+
+        bottom = top + height
+        right = left + width
+    else:
+        # check if bottom right coordinates are array-like
+        requireArrayLike(bottom_right, var_name='bottom_right')
+        # check if bottom left coordinates are of shape (2,)
+        requireShape(bottom_right, (2,))
+
+        bottom = bottom_right[0] + 1
+        right = bottom_right[1] + 1
+
+    cropped_img = img[top:bottom, left:right]
+
+    return cropped_img
+
+
 def slidingWindowOperation(img, window, op=np.mean, dtype=object, edges=False):
     '''
     Perform operation on sliding window over image.
@@ -148,10 +214,10 @@ def slidingWindowOperation(img, window, op=np.mean, dtype=object, edges=False):
 
     Returns
     -------
-    output : numpy.ndarray
-        Output array after sliding window operation. If ``edges`` is ``True``,
-        its shape is ``(h + n - 1, w + m - 1)``, otherwise its shape is
-        ``(h - n + 1, w - n + 1)``.
+    output_img : numpy.ndarray
+        Output image array after sliding window operation. If ``edges`` is
+        ``True``, its shape is ``(h + n - 1, w + m - 1)``, otherwise its shape
+        is ``(h - n + 1, w - n + 1)``.
     '''
 
     h, w = np.shape(img)
@@ -175,7 +241,7 @@ def slidingWindowOperation(img, window, op=np.mean, dtype=object, edges=False):
         top_left_range[1][1] - top_left_range[1][0],
     )
     # create output array of zeros
-    output = np.zeros(output_shape, dtype=dtype)
+    output_img = np.zeros(output_shape, dtype=dtype)
 
     # perform operation on image and store in output array
     p = 0
@@ -187,7 +253,7 @@ def slidingWindowOperation(img, window, op=np.mean, dtype=object, edges=False):
                 (max(j, 0), min(j + m, w)),
             )
 
-            output[p][q] = op(
+            output_img[p][q] = op(
                 img[
                     window_range[0][0] : window_range[0][1],
                     window_range[1][0] : window_range[1][1],
@@ -197,4 +263,4 @@ def slidingWindowOperation(img, window, op=np.mean, dtype=object, edges=False):
 
         p += 1
 
-    return output
+    return output_img

@@ -1,9 +1,9 @@
 import numpy as np
-from openchroma.imageops import slidingWindowOperation
+from openchroma.imageops import cropImage
 
-img = np.arange(0, 100, 9).reshape(4, 3)
+img = np.arange(0, 100, 5).reshape(4, 5)
 print(img)
 print('')
 
-o = slidingWindowOperation(img, (2, 2), op=np.mean, edges=False)
-print(o)
+cropped = cropImage(img, (1, 1), bottom_right=(3, 3))
+print(cropped)
