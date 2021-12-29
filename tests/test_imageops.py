@@ -6,6 +6,7 @@ from openchroma.imageops import (
     saveImage,
     splitChannels,
     combineChannels,
+    cropImage,
     slidingWindowOperation,
 )
 
@@ -79,7 +80,84 @@ slidingWindowOperation_parameters = [
     ],
 ]
 
-@pytest.mark.parametrize('img, window, op, dtype, edges, output', slidingWindowOperation_parameters)
-def test_slidingWindowOperation(img, window, op, dtype, edges, output):
-    output_computed = slidingWindowOperation(img, window, op=op, dtype=dtype, edges=edges)
-    assert np.array_equal(output, output_computed)
+@pytest.mark.parametrize('img, window, op, dtype, edges, output_img', slidingWindowOperation_parameters)
+def test_slidingWindowOperation(img, window, op, dtype, edges, output_img):
+    output_img_computed = slidingWindowOperation(img, window, op=op, dtype=dtype, edges=edges)
+    assert np.array_equal(output_img, output_img_computed)
+
+cropImage_parameters = [
+    [
+        np.array([
+            [0, 5, 10, 15, 20],
+            [25, 30, 35, 40, 45],
+            [50, 55, 60, 65, 70],
+            [75, 80, 85, 90, 95],
+        ], dtype=np.float64),
+        (1, 1),
+        (2, 2),
+        None,
+        np.array([
+            [30, 35],
+            [55, 60],
+        ], dtype=np.float64),
+    ],
+    [
+        np.array([
+            [0, 5, 10, 15, 20],
+            [25, 30, 35, 40, 45],
+            [50, 55, 60, 65, 70],
+            [75, 80, 85, 90, 95],
+        ], dtype=np.float64),
+        (1, 1),
+        (3, 2),
+        None,
+        np.array([
+            [30, 35],
+            [55, 60],
+            [80, 85],
+        ], dtype=np.float64),
+    ],
+    [
+        np.array([
+            [0, 5, 10, 15, 20],
+            [25, 30, 35, 40, 45],
+            [50, 55, 60, 65, 70],
+            [75, 80, 85, 90, 95],
+        ], dtype=np.float64),
+        (0, 1),
+        None,
+        (2, 2),
+        np.array([
+            [5, 10],
+            [30, 35],
+        ], dtype=np.float64),
+    ],
+    [
+        np.array([
+            [0, 5, 10, 15, 20],
+            [25, 30, 35, 40, 45],
+            [50, 55, 60, 65, 70],
+            [75, 80, 85, 90, 95],
+        ], dtype=np.float64),
+        (1, 2),
+        None,
+        (3, 2),
+        np.array([
+            [35, 40],
+            [60, 65],
+            [85, 90],
+        ], dtype=np.float64),
+    ],
+]
+
+def test_cropImage_error():
+    with pytest.raises(ValueError):
+        cropImage(np.zeros(100).reshape(10, 10), (1, 2), bottom_right=None, height_width=None)
+
+    with pytest.raises(ValueError):
+        cropImage(np.zeros(100).reshape(10, 10), (1, 2), bottom_right=(3, 4), height_width=(5, 6))
+
+@pytest.mark.parametrize('img, top_left, bottom_right, height_width, cropped_img', cropImage_parameters)
+def test_cropImage(img, top_left, bottom_right, height_width, cropped_img):
+    cropped_img_computed = cropImage(img, top_left, bottom_right=bottom_right, height_width=height_width)
+    assert np.array_equal(cropped_img, cropped_img_computed)

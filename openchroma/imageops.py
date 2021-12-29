@@ -178,6 +178,12 @@ def cropImage(img, top_left, bottom_right=None, height_width=None):
         bottom = top + height
         right = left + width
     else:
+        if height_width is not None:
+            message = 'Only one of '
+            message += '`bottom_right` and `height_width` '
+            message += 'can be specified'
+            raise ValueError(message)
+
         # check if bottom right coordinates are array-like
         requireArrayLike(bottom_right, var_name='bottom_right')
         # check if bottom left coordinates are of shape (2,)
