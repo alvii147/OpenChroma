@@ -7,7 +7,7 @@ from openchroma.imageops import (
     splitChannels,
     combineChannels,
     cropImage,
-    slidingWindowOperation,
+    slidingWindow,
 )
 
 def generateRandomImage(height, width):
@@ -41,7 +41,7 @@ def test_splitChannels_combineChannels():
 
     assert np.array_equal(img, img_combined)
 
-slidingWindowOperation_parameters = [
+slidingWindow_parameters = [
     [
         np.array([
             [0, 9, 18],
@@ -80,9 +80,9 @@ slidingWindowOperation_parameters = [
     ],
 ]
 
-@pytest.mark.parametrize('img, window, op, dtype, edges, output_img', slidingWindowOperation_parameters)
-def test_slidingWindowOperation(img, window, op, dtype, edges, output_img):
-    output_img_computed = slidingWindowOperation(img, window, op=op, dtype=dtype, edges=edges)
+@pytest.mark.parametrize('img, window, op, dtype, edges, output_img', slidingWindow_parameters)
+def test_slidingWindow(img, window, op, dtype, edges, output_img):
+    output_img_computed = slidingWindow(img, window, op=op, dtype=dtype, edges=edges)
     assert np.array_equal(output_img, output_img_computed)
 
 cropImage_parameters = [

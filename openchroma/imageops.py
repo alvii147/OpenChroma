@@ -197,7 +197,7 @@ def cropImage(img, top_left, bottom_right=None, height_width=None):
     return cropped_img
 
 
-def slidingWindowOperation(img, window, op=np.mean, dtype=object, edges=False):
+def slidingWindow(img, window, op=np.mean, dtype=object, edges=False):
     '''
     Perform operation on sliding window over image.
 
