@@ -226,7 +226,7 @@ def slidingWindow(img, window, op=np.mean, dtype=object, edges=False):
         is ``(h - n + 1, w - n + 1)``.
     '''
 
-    h, w = np.shape(img)
+    h, w, *_ = np.shape(img)
     n, m = window
 
     # set up iteration ranges

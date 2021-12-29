@@ -11,7 +11,7 @@ from openchroma.imageops import (
 )
 
 def generateRandomImage(height, width):
-    img = np.around(np.random.rand(height, height, 3) * 255)
+    img = np.around(np.random.rand(height, width, 3) * 255)
 
     return img
 
@@ -152,12 +152,22 @@ cropImage_parameters = [
 
 def test_cropImage_error():
     with pytest.raises(ValueError):
-        cropImage(np.zeros(100).reshape(10, 10), (1, 2), bottom_right=None, height_width=None)
+        cropImage(generateRandomImage(100, 100), (1, 2), bottom_right=None, height_width=None)
 
     with pytest.raises(ValueError):
-        cropImage(np.zeros(100).reshape(10, 10), (1, 2), bottom_right=(3, 4), height_width=(5, 6))
+        cropImage(generateRandomImage(100, 100), (1, 2), bottom_right=(3, 4), height_width=(5, 6))
 
 @pytest.mark.parametrize('img, top_left, bottom_right, height_width, cropped_img', cropImage_parameters)
 def test_cropImage(img, top_left, bottom_right, height_width, cropped_img):
     cropped_img_computed = cropImage(img, top_left, bottom_right=bottom_right, height_width=height_width)
     assert np.array_equal(cropped_img, cropped_img_computed)
+
+def test_cropImage_slidingWindow():
+    img_shape = (np.random.randint(20, 1000), np.random.randint(20, 1000))
+    window = (np.random.randint(2, img_shape[0] // 2), np.random.randint(2, img_shape[1] // 2))
+    img = generateRandomImage(*img_shape)
+    slidingMean = slidingWindow(img, window, op=np.mean, dtype=np.float64, edges=False)
+
+    for i in range(img_shape[0] - window[0] + 1):
+        for j in range(img_shape[1] - window[1] + 1):
+            np.mean(cropImage(img, (i, j), height_width=window)) == slidingMean[i][j]
