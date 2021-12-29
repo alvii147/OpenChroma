@@ -6,7 +6,7 @@ cd "$(dirname "$0")"
 # set PYTHONPATH
 export PYTHONPATH=${PWD}
 
-# run all tests
+# run all tests with coverage
 coverage run -m pytest -v -s tests/
 
 # get coverage report
