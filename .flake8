@@ -1,3 +1,13 @@
 [flake8]
-ignore = E203, F401
+ignore =
+    E203,
+    F401,
+    W503
+
 max-line-length = 79
+
+exclude =
+    .git,
+    .py[co],
+    */__pycache__/*,
+    env/*

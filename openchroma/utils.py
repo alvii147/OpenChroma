@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def isArrayLike(arr):
+def is_array_like(arr):
     '''
     Check if object is array-like.
 
@@ -12,16 +12,16 @@ def isArrayLike(arr):
 
     Returns
     -------
-    is_array_like : bool
+    arr_like : bool
         Indicates whether given object is array-like.
     '''
 
-    is_array_like = isinstance(arr, (list, tuple, np.ndarray))
+    arr_like = isinstance(arr, (list, tuple, np.ndarray))
 
-    return is_array_like
+    return arr_like
 
 
-def requireArrayLike(arr, var_name='Array', exception=TypeError):
+def require_array_like(arr, var_name='Array', exception=TypeError):
     '''
     Raise exception if object is array-like.
 
@@ -35,12 +35,12 @@ def requireArrayLike(arr, var_name='Array', exception=TypeError):
         Exception to raise if test fails.
     '''
 
-    if not isArrayLike(arr):
+    if not is_array_like(arr):
         message = f'`{var_name}` must be an array-like object'
         raise exception(message)
 
 
-def isShape(arr, shape):
+def is_shape(arr, shape):
     '''
     Check if array is of desired shape.
 
@@ -53,7 +53,7 @@ def isShape(arr, shape):
 
     Returns
     -------
-    is_shape : bool
+    shapes_equal : bool
         Indicates whether given array is of desired shape.
     '''
 
@@ -61,12 +61,12 @@ def isShape(arr, shape):
     if np.isscalar(shape):
         shape = (shape,)
 
-    is_shape = np.array_equal(arr_shape, shape)
+    shapes_equal = np.array_equal(arr_shape, shape)
 
-    return is_shape
+    return shapes_equal
 
 
-def requireShape(arr, shape, var_name='Array', exception=ValueError):
+def require_shape(arr, shape, var_name='Array', exception=ValueError):
     '''
     Raise exception if array is not of desired shape.
 
@@ -82,12 +82,12 @@ def requireShape(arr, shape, var_name='Array', exception=ValueError):
         Exception to raise if test fails.
     '''
 
-    if not isShape(arr, shape):
+    if not is_shape(arr, shape):
         message = f'`{var_name}` must be of shape {shape}'
         raise exception(message)
 
 
-def isDim(arr, dim):
+def is_dim(arr, dim):
     '''
     Check if array is of desired shape.
 
@@ -100,17 +100,17 @@ def isDim(arr, dim):
 
     Returns
     -------
-    is_dim : bool
+    dim_equal : bool
         Indicates whether given array is of desired dimension.
     '''
 
     arr_shape = np.shape(arr)
-    is_dim = len(arr_shape) == dim
+    dim_equal = len(arr_shape) == dim
 
-    return is_dim
+    return dim_equal
 
 
-def requireDim(arr, dim, var_name='Array', exception=ValueError):
+def require_dim(arr, dim, var_name='Array', exception=ValueError):
     '''
     Raise exception if array is not of desired dimension.
 
@@ -126,12 +126,12 @@ def requireDim(arr, dim, var_name='Array', exception=ValueError):
         Exception to raise if test fails.
     '''
 
-    if not isDim(arr, dim):
+    if not is_dim(arr, dim):
         message = f'`{var_name}` must be {dim}-dimensional'
         raise exception(message)
 
 
-def isAxisSize(arr, size, axis=0):
+def is_axis_size(arr, size, axis=0):
     '''
     Check if given axis of array is of desired size.
 
@@ -146,17 +146,23 @@ def isAxisSize(arr, size, axis=0):
 
     Returns
     -------
-    is_axis_size : bool
+    size_equal : bool
         Indicates whether given axis of array is of desired size.
     '''
 
     arr_shape = np.shape(arr)
-    is_axis_size = arr_shape[axis] == size
+    size_equal = arr_shape[axis] == size
 
-    return is_axis_size
+    return size_equal
 
 
-def requireAxisSize(arr, size, axis=0, var_name='Array', exception=ValueError):
+def require_axis_size(
+    arr,
+    size,
+    axis=0,
+    var_name='Array',
+    exception=ValueError,
+):
     '''
     Raise exception if given axis of array is not of desired size.
 
@@ -174,6 +180,6 @@ def requireAxisSize(arr, size, axis=0, var_name='Array', exception=ValueError):
         Exception to raise if test fails.
     '''
 
-    if not isAxisSize(arr, size, axis=axis):
+    if not is_axis_size(arr, size, axis=axis):
         message = f'`{var_name}` must be of size {size} at axis {axis}'
         raise exception(message)

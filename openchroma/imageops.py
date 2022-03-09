@@ -1,11 +1,16 @@
 import numpy as np
 from PIL import Image
 
-from .utils import requireArrayLike, requireDim, requireAxisSize, requireShape
+from .utils import (
+    require_array_like,
+    require_dim,
+    require_axis_size,
+    require_shape,
+)
 from .constants import RGB_SHAPE
 
 
-def openImage(path):
+def open_image(path):
     '''
     Open image from given path.
 
@@ -28,7 +33,7 @@ def openImage(path):
     return img
 
 
-def saveImage(img, path):
+def save_image(img, path):
     '''
     Save image at given path.
 
@@ -42,9 +47,9 @@ def saveImage(img, path):
     '''
 
     # check if input is array-like
-    requireArrayLike(img, var_name='img')
+    require_array_like(img, var_name='img')
     # check if last axis is 3-dimensional
-    requireAxisSize(img, RGB_SHAPE[-1], axis=-1, var_name='img')
+    require_axis_size(img, RGB_SHAPE[-1], axis=-1, var_name='img')
 
     # create image from array
     im = Image.fromarray(np.array(img, dtype=np.uint8), 'RGB')
@@ -52,7 +57,7 @@ def saveImage(img, path):
     im.save(path)
 
 
-def splitChannels(img):
+def split_channels(img):
     '''
     Split image array into RGB channel arrays.
 
@@ -74,9 +79,9 @@ def splitChannels(img):
     '''
 
     # check if input is array-like
-    requireArrayLike(img, var_name='img')
+    require_array_like(img, var_name='img')
     # check if last axis is 3-dimensional
-    requireAxisSize(img, RGB_SHAPE[-1], axis=-1, var_name='img')
+    require_axis_size(img, RGB_SHAPE[-1], axis=-1, var_name='img')
 
     # unpack image array into channel arrays
     r, g, b = np.transpose(img)
@@ -89,7 +94,7 @@ def splitChannels(img):
     return r, g, b
 
 
-def combineChannels(r, g, b):
+def combine_channels(r, g, b):
     '''
     Combine RGB channel arrays into image array.
 
@@ -111,13 +116,13 @@ def combineChannels(r, g, b):
     '''
 
     # check if inputs are array-like
-    requireArrayLike(r, var_name='r')
-    requireArrayLike(g, var_name='g')
-    requireArrayLike(b, var_name='b')
+    require_array_like(r, var_name='r')
+    require_array_like(g, var_name='g')
+    require_array_like(b, var_name='b')
     # check if inputs are 2-dimensional
-    requireDim(r, 2)
-    requireDim(g, 2)
-    requireDim(b, 2)
+    require_dim(r, 2)
+    require_dim(g, 2)
+    require_dim(b, 2)
 
     # pack channel arrays into image array
     img = np.stack((r, g, b), axis=-1)
@@ -125,7 +130,7 @@ def combineChannels(r, g, b):
     return img
 
 
-def cropImage(img, top_left, bottom_right=None, height_width=None):
+def crop_image(img, top_left, bottom_right=None, height_width=None):
     '''
     Crop image by given coordinates and lengths.
 
@@ -152,10 +157,10 @@ def cropImage(img, top_left, bottom_right=None, height_width=None):
     '''
 
     # check if inputs are array-like
-    requireArrayLike(img, var_name='img')
+    require_array_like(img, var_name='img')
     # check if top left coordinates are array-like and of shape (2,)
-    requireArrayLike(top_left, var_name='top_left')
-    requireShape(top_left, (2,))
+    require_array_like(top_left, var_name='top_left')
+    require_shape(top_left, (2,))
 
     top = top_left[0]
     left = top_left[1]
@@ -168,9 +173,9 @@ def cropImage(img, top_left, bottom_right=None, height_width=None):
             raise ValueError(message)
 
         # check if height & width are array-like
-        requireArrayLike(height_width, var_name='height_width')
+        require_array_like(height_width, var_name='height_width')
         # check if height & width are of shape (2,)
-        requireShape(height_width, (2,))
+        require_shape(height_width, (2,))
 
         height = height_width[0]
         width = height_width[1]
@@ -185,9 +190,9 @@ def cropImage(img, top_left, bottom_right=None, height_width=None):
             raise ValueError(message)
 
         # check if bottom right coordinates are array-like
-        requireArrayLike(bottom_right, var_name='bottom_right')
+        require_array_like(bottom_right, var_name='bottom_right')
         # check if bottom left coordinates are of shape (2,)
-        requireShape(bottom_right, (2,))
+        require_shape(bottom_right, (2,))
 
         bottom = bottom_right[0] + 1
         right = bottom_right[1] + 1
@@ -197,7 +202,7 @@ def cropImage(img, top_left, bottom_right=None, height_width=None):
     return cropped_img
 
 
-def slidingWindow(img, window, op=np.mean, dtype=object, edges=False):
+def sliding_window(img, window, op=np.mean, dtype=object, edges=False):
     '''
     Perform operation on sliding window over image.
 
