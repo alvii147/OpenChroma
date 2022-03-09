@@ -2,5 +2,6 @@
 line-length = 79
 
 extend-exclude = '''
-    env/.*
+    env/.* |
+    docs/*
 '''
