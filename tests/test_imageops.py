@@ -18,8 +18,8 @@ def generate_random_image(height, width):
 
 
 def test_open_image_save_image():
-    img = open_image('img/popcat.png')
-    save_image(img, 'img/popcat2.png')
+    img = open_image('docs/img/popcat.png')
+    save_image(img, 'docs/img/popcat2.png')
 
 
 def test_split_channels_combine_channels():

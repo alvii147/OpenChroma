@@ -1,0 +1,332 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>imageops &#8212; OpenChroma  documentation</title>
+    
+    <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  
+    
+    <link rel="stylesheet"
+      href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+      href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+      href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+    
+      
+  
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/pydata-sphinx-theme.css" />
+    
+    <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="colorspace" href="colorspace.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="index.html">
+  <img src="_static/OpenChroma_Logo.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="openchroma.html">
+  openchroma
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://www.islamicreliefcanada.org/emergencies/palestine/">Donate to Palestine<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/alvii147/OpenChroma" rel="noopener" target="_blank" title="GitHub"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar">
+              <div class="sidebar-start-items"><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="colorspace.html">
+   colorspace
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   imageops
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+              </div>
+              <div class="sidebar-end-items">
+              </div>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+
+<nav id="bd-toc-nav">
+    
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <section id="module-openchroma.imageops">
+<span id="imageops"></span><h1>imageops<a class="headerlink" href="#module-openchroma.imageops" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="openchroma.imageops.combine_channels">
+<span class="sig-prename descclassname"><span class="pre">openchroma.imageops.</span></span><span class="sig-name descname"><span class="pre">combine_channels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openchroma.imageops.combine_channels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine RGB channel arrays into image array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>r</strong> (<em>array-like</em>) – 2D red channel array.</p></li>
+<li><p><strong>g</strong> (<em>array-like</em>) – 2D green channel array.</p></li>
+<li><p><strong>b</strong> (<em>array-like</em>) – 2D blue channel array.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>img</strong> – 3D image array in RGB space.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="openchroma.imageops.crop_image">
+<span class="sig-prename descclassname"><span class="pre">openchroma.imageops.</span></span><span class="sig-name descname"><span class="pre">crop_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_left</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom_right</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openchroma.imageops.crop_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Crop image by given coordinates and lengths.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> (<em>array-like</em>) – 2D (or higher) image array.</p></li>
+<li><p><strong>top_left</strong> (<em>array-like</em>) – Coordinates of top left point where the image should be cropped.</p></li>
+<li><p><strong>bottom_right</strong> (<em>array-like</em><em>, </em><em>optional</em>) – Coordinates of the bottom right point where the image should be
+cropped. If this is not provided, <code class="docutils literal notranslate"><span class="pre">height_width</span></code> must be given.</p></li>
+<li><p><strong>height_width</strong> (<em>array-like</em><em>, </em><em>optional</em>) – Height &amp; width of the cropped image, packed in a 2-element array. If
+this is not provided, <code class="docutils literal notranslate"><span class="pre">bottom_right</span></code> must be given.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cropped_img</strong> – 2D (or higher) cropped image array.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="openchroma.imageops.open_image">
+<span class="sig-prename descclassname"><span class="pre">openchroma.imageops.</span></span><span class="sig-name descname"><span class="pre">open_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openchroma.imageops.open_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open image from given path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> (str, <code class="docutils literal notranslate"><span class="pre">pathlib.Path</span></code> object or file object) – Path to image file.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>img</strong> – 3D image array in RGB space.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="openchroma.imageops.save_image">
+<span class="sig-prename descclassname"><span class="pre">openchroma.imageops.</span></span><span class="sig-name descname"><span class="pre">save_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openchroma.imageops.save_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save image at given path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> (<em>array-like</em>) – 3D image array in RGB space.</p></li>
+<li><p><strong>path</strong> (str, <code class="docutils literal notranslate"><span class="pre">pathlib.Path</span></code> object or file object) – Path to file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="openchroma.imageops.sliding_window">
+<span class="sig-prename descclassname"><span class="pre">openchroma.imageops.</span></span><span class="sig-name descname"><span class="pre">sliding_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">op</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">np.mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openchroma.imageops.sliding_window" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform operation on sliding window over image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> (<em>array-like</em>) – 3D image array in RGB space.</p></li>
+<li><p><strong>window</strong> (<em>array-like</em>) – 2-element array indicating shape of window.</p></li>
+<li><p><strong>op</strong> (<em>callable function</em><em>, </em><em>optional</em>) – Operation to perform on each window.</p></li>
+<li><p><strong>dtype</strong> (<em>type</em>) – Data type of output array</p></li>
+<li><p><strong>edges</strong> (<em>bool</em>) – Indicates whether or not to cover edges of image using smaller window.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>output_img</strong> – Output image array after sliding window operation. If <code class="docutils literal notranslate"><span class="pre">edges</span></code> is
+<code class="docutils literal notranslate"><span class="pre">True</span></code>, its shape is <code class="docutils literal notranslate"><span class="pre">(h</span> <span class="pre">+</span> <span class="pre">n</span> <span class="pre">-</span> <span class="pre">1,</span> <span class="pre">w</span> <span class="pre">+</span> <span class="pre">m</span> <span class="pre">-</span> <span class="pre">1)</span></code>, otherwise its shape
+is <code class="docutils literal notranslate"><span class="pre">(h</span> <span class="pre">-</span> <span class="pre">n</span> <span class="pre">+</span> <span class="pre">1,</span> <span class="pre">w</span> <span class="pre">-</span> <span class="pre">n</span> <span class="pre">+</span> <span class="pre">1)</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="openchroma.imageops.split_channels">
+<span class="sig-prename descclassname"><span class="pre">openchroma.imageops.</span></span><span class="sig-name descname"><span class="pre">split_channels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openchroma.imageops.split_channels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split image array into RGB channel arrays.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>img</strong> (<em>array-like</em>) – 3D image array in RGB space.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>r</strong> (<em>numpy.ndarray</em>) – 2D red channel array.</p></li>
+<li><p><strong>g</strong> (<em>numpy.ndarray</em>) – 2D green channel array.</p></li>
+<li><p><strong>b</strong> (<em>numpy.ndarray</em>) – 2D blue channel array.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="colorspace.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">colorspace</p>
+        </div>
+    </a>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+    <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2022, Zahin Zaman.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.4.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>
