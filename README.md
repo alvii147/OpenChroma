@@ -1,0 +1,1 @@
+![OpenChroma Logo](docs/img/OpenChroma_Logo.png)
