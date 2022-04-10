@@ -14,7 +14,7 @@ authors = ["Zahin Zaman <alvii147@gmail.com>"]
 license = "BSD-3-Clause License"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.8"
 numpy = "^1.22.3"
 Pillow = "^9.1.0"
 
