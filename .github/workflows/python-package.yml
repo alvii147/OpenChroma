@@ -24,11 +24,13 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
-        python3 -m pip install -r requirements.txt
-        python3 -m pip install -r tests/requirements.tests.txt
+        python3 -m pip install -r poetry
+        poetry install
     - name: Run flake8 & black
       run: |
-        ./format.sh
+        poetry run flake8 . --count --show-source --statistics
+        poetry run black --check --diff --skip-string-normalization .
     - name: Run pytest with coverage
       run: |
-        ./cov.sh
+        poetry run coverage run -m pytest -v -s tests/
+        poetry run coverage report -m
