@@ -5,3 +5,25 @@ extend-exclude = '''
     env/.* |
     docs/*
 '''
+
+[tool.poetry]
+name = "openchroma"
+version = "0.1.0"
+description = "Python library for image processing & operations"
+authors = ["Zahin Zaman <alvii147@gmail.com>"]
+license = "BSD-3-Clause License"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+numpy = "^1.22.3"
+Pillow = "^9.1.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.1.1"
+coverage = "^6.3.2"
+flake8 = "^4.0.1"
+black = "^22.3.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
